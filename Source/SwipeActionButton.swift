@@ -27,7 +27,7 @@ class SwipeActionButton: UIButton {
         return contentRect.center(size: CGSize(width: contentRect.width, height: totalHeight))
     }
     
-    convenience init(action: SwipeAction) {
+    convenience init(action: SwipeAction, inverted: Bool) {
         self.init(frame: .zero)
 
         contentHorizontalAlignment = .center
@@ -48,6 +48,10 @@ class SwipeActionButton: UIButton {
         setTitleColor(highlightedTextColor, for: .highlighted)
         setImage(action.image, for: .normal)
         setImage(action.highlightedImage ?? action.image, for: .highlighted)
+
+        if inverted {
+            transform = CGAffineTransform(rotationAngle: -CGFloat.pi)
+        }
     }
     
     override var isHighlighted: Bool {

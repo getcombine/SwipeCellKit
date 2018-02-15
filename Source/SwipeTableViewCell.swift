@@ -16,6 +16,8 @@ import UIKit
 open class SwipeTableViewCell: UITableViewCell {
     /// The object that acts as the delegate of the `SwipeTableViewCell`.
     public weak var delegate: SwipeTableViewCellDelegate?
+
+    public var isInverted = false
     
     var animator: SwipeAnimator?
 
@@ -237,7 +239,7 @@ open class SwipeTableViewCell: UITableViewCell {
         let actionsView = SwipeActionsView(maxSize: bounds.size,
                                            options: options,
                                            orientation: orientation,
-                                           actions: actions)
+                                           actions: actions, inverted: isInverted)
         
         actionsView.delegate = self
         
