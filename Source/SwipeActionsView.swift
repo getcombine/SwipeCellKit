@@ -86,8 +86,7 @@ class SwipeActionsView: UIView {
          safeAreaInsetView: UIView,
          options: SwipeOptions,
          orientation: SwipeActionsOrientation,
-         actions: [SwipeAction],
-         inverted: Bool) {
+         actions: [SwipeAction]) {
         
         self.safeAreaInsetView = safeAreaInsetView
         self.options = options
@@ -114,16 +113,16 @@ class SwipeActionsView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = options.backgroundColor ?? #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1)
 
-        buttons = addButtons(for: self.actions, withMaximum: maxSize, contentEdgeInsets: contentEdgeInsets, inverted: inverted)
+        buttons = addButtons(for: self.actions, withMaximum: maxSize, contentEdgeInsets: contentEdgeInsets)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func addButtons(for actions: [SwipeAction], withMaximum size: CGSize, contentEdgeInsets: UIEdgeInsets, inverted: Bool) -> [SwipeActionButton] {
+    func addButtons(for actions: [SwipeAction], withMaximum size: CGSize, contentEdgeInsets: UIEdgeInsets) -> [SwipeActionButton] {
         let buttons: [SwipeActionButton] = actions.map({ action in
-            let actionButton = SwipeActionButton(action: action, inverted: inverted)
+            let actionButton = SwipeActionButton(action: action, inverted: options.isInverted)
             actionButton.addTarget(self, action: #selector(actionTapped(button:)), for: .touchUpInside)
             actionButton.autoresizingMask = [.flexibleHeight, orientation == .right ? .flexibleRightMargin : .flexibleLeftMargin]
             actionButton.spacing = options.buttonSpacing ?? 8

@@ -189,8 +189,6 @@ class SwipeController: NSObject {
     
     func configureActionsView(with actions: [SwipeAction], for orientation: SwipeActionsOrientation) {
 
-        var isInverted = false
-
         guard var swipeable = self.swipeable,
             let actionsContainerView = self.actionsContainerView,
             let scrollView = self.scrollView else {
@@ -217,8 +215,7 @@ class SwipeController: NSObject {
                                            safeAreaInsetView: scrollView,
                                            options: options,
                                            orientation: orientation,
-                                           actions: actions,
-                                           inverted: isInverted)
+                                           actions: actions)
         actionsView.delegate = self
         
         actionsContainerView.addSubview(actionsView)
